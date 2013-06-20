@@ -328,6 +328,7 @@ def author(request, username, page=1):
 
 
 class MonthlyView(MonthArchiveView):
+
     queryset = BlogEntry.objects.filter(is_page=False, is_published=True)
     date_field = 'created_on'
     make_object_list = True
@@ -336,7 +337,11 @@ class MonthlyView(MonthArchiveView):
     month=  ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"]
     # queryset=queryset,
     allow_empty=True
-    extra_context=_get_sidebar_objects(request)
+    #extra_context=_get_sidebar_objects(request)
+    def get_context_data(self, **kwargs):
+        context = super(MonthlyView, self).get_context_data(**kwargs)
+        context.update(_get_sidebar_objects(self.request))
+        return context
     
 #def monthly_view(request, year, month):
 #    queryset = BlogEntry.objects.filter(is_page=False, is_published=True)
