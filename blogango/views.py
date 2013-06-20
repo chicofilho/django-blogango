@@ -335,7 +335,7 @@ class MonthlyView(MonthArchiveView):
     # year=year
     month=  ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"]
     # queryset=queryset,
-    allow_empty=True,
+    allow_empty=True
     extra_context=_get_sidebar_objects(request)
     
 #def monthly_view(request, year, month):
