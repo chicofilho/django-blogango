@@ -1,5 +1,6 @@
 from datetime import datetime
 from django.conf.urls.defaults import *
+from blogango.views import MonthlyView
 from django.contrib.sitemaps import GenericSitemap
 from blogango import feeds
 from blogango.models import BlogEntry
@@ -47,7 +48,7 @@ urlpatterns += patterns('django.contrib.sitemaps.views',
 
 # Archive view
 urlpatterns += patterns('blogango.views',
-    url(r'^archive/(?P<year>\d+)/(?P<month>\w+)/$', 'MonthlyView', name='blogango_archives')
+    url(r'^archive/(?P<year>\d+)/(?P<month>\w+)/$', MonthlyView.as_view(), name='blogango_archives')
 )
 
 urlpatterns += patterns('django_xmlrpc.views',

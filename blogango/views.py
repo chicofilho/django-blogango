@@ -328,32 +328,17 @@ def author(request, username, page=1):
 
 
 class MonthlyView(MonthArchiveView):
-
+    template_name = 'blogango/archive_view.html'
     queryset = BlogEntry.objects.filter(is_page=False, is_published=True)
     date_field = 'created_on'
     make_object_list = True
     allow_future = True
-    # year=year
-    month=  ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"]
-    # queryset=queryset,
     allow_empty=True
-    #extra_context=_get_sidebar_objects(request)
     def get_context_data(self, **kwargs):
         context = super(MonthlyView, self).get_context_data(**kwargs)
         context.update(_get_sidebar_objects(self.request))
         return context
     
-#def monthly_view(request, year, month):
-#    queryset = BlogEntry.objects.filter(is_page=False, is_published=True)
-#    return archive_month(request=request,
-#                         template_name='blogango/archive_view.html',
-#                         year=year,
-#                         month=month,
-#                         queryset=queryset,
-#                         date_field='created_on',
-#                         allow_empty=True,
-#                         extra_context=_get_sidebar_objects(request))
-
 
 #Helper methods.
 def _is_blog_installed():
